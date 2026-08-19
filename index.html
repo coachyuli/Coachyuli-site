@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yulianna Rodak · Personal Training for Women</title>
+  <meta name="description" content="Personal training and coaching for women who want to start their fitness journey. Beginner-friendly, judgment-free, online and in-person." />
+
+  <!-- Open Graph -->
+  <!-- TODO: replace all og: content with real details -->
+  <meta property="og:title" content="Yulianna Rodak · Personal Training for Women" />
+  <meta property="og:description" content="Coaching for women who want to be strong, successful, and have a healthy relationship with food." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourwebsite.com" /><!-- TODO: replace with real URL -->
+  <meta property="og:image" content="https://yourwebsite.com/og-image.jpg" /><!-- TODO: add real OG image -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Design Tokens */
+    :root {
+      --bg:           #ffffff;
+      --bg-soft:      #faf7f8;
+      --ink:          #1f1b1d;
+      --muted:        #6f676a;
+      --accent:       #c97d92;
+      --accent-deep:  #a85f74;
+      --accent-soft:  #f4e7eb;
+      --line:         #ece7e8;
+      --radius-card:  16px;
+      --radius-btn:   999px;
+      --max-w:        1100px;
+      --section-py:   clamp(3rem, 8vw, 7rem);
+      --section-px:   clamp(1.25rem, 5vw, 2rem);
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Typography Scale */
+    .serif { font-family: 'Playfair Display', Georgia, serif; }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    h1 { font-size: clamp(1.6rem, 6vw, 4rem); font-weight: 600; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(1.9rem, 3.8vw, 2.8rem); font-weight: 600; }
+    h3 { font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 500; }
+    h4 { font-size: 1.05rem; font-weight: 500; }
+
+    p { color: var(--muted); font-size: clamp(0.95rem, 1.5vw, 1.05rem); }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Layout Utilities */
+    .container {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--section-px);
+    }
+
+    section {
+      padding-block: var(--section-py);
+    }
+
+    .section-alt { background: var(--bg-soft); }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 0;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: var(--radius-btn);
+      padding: 0.75rem 1.75rem;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+      text-decoration: none;
+      border: 1.5px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: var(--accent-deep);
+      border-color: var(--accent-deep);
+      box-shadow: 0 6px 20px rgba(168, 95, 116, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .btn-ghost:hover {
+      background: var(--accent-soft);
+      box-shadow: 0 4px 14px rgba(168, 95, 116, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      font-size: 0.82rem;
+      padding: 0.6rem 1.35rem;
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--section-px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    /* Nav links + desktop CTA: hidden on mobile, shown at 900px+ */
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-cta { display: none; }
+
+    /* Language toggle */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: var(--accent-soft);
+      border-radius: 999px;
+      padding: 3px;
+      flex-shrink: 0;
+    }
+    .lang-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      border: none;
+      border-radius: 999px;
+      padding: 0.3rem 0.65rem;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      background: transparent;
+      color: var(--muted);
+      min-height: 30px;
+    }
+    .lang-btn[aria-pressed="true"] {
+      background: var(--accent);
+      color: #fff;
+    }
+    .lang-btn[aria-pressed="false"] {
+      background: transparent;
+      color: var(--accent-deep);
+    }
+    .lang-btn[aria-pressed="false"]:hover {
+      background: rgba(201,125,146,0.15);
+    }
+
+    /* Hamburger: visible by default on mobile */
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .nav-hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease, width 0.2s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav dropdown */
+    .nav-mobile {
+      display: none;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      padding: 1.25rem var(--section-px) 1.5rem;
+    }
+    .nav-mobile.open { display: block; }
+    .nav-mobile ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .nav-mobile a {
+      display: block;
+      padding: 0.85rem 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      min-height: 44px;
+    }
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile .btn {
+      margin-top: 1rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+    @media (min-width: 640px) {
+      .nav-logo { font-size: 1.2rem; }
+    }
+
+    /* Hero */
+    .hero {
+      padding-block: clamp(2.25rem, 7vw, 8rem);
+      background: var(--bg);
+    }
+
+    .hero-inner {
+      max-width: 620px;
+      margin-inline: auto;
+      padding-inline: var(--section-px);
+      text-align: center;
+    }
+
+    #hero-heading {
+      margin-bottom: 1.85rem;
+      max-width: 18ch;
+      margin-inline: auto;
+      line-height: 1.2;
+      text-wrap: balance;
+    }
+
+    .hero-subhead {
+      font-size: clamp(0.92rem, 1.6vw, 1.1rem);
+      color: var(--muted);
+      margin: 0 auto 1.75rem;
+      max-width: 40ch;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+    .hero-buttons .btn {
+      width: 100%;
+      max-width: 210px;
+      margin-inline: auto;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.8rem;
+    }
+
+    .hero-trust {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem 0.5rem;
+      flex-wrap: wrap;
+      max-width: 300px;
+      margin-inline: auto;
+    }
+    .hero-trust span { display: inline-flex; align-items: center; gap: 0.3rem; }
+    .hero-trust .dot {
+      width: 3px;
+      height: 3px;
+      background: var(--line);
+      border-radius: 50%;
+    }
+
+    /* Hero circular avatar */
+    .hero-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--accent-soft), #e8d0d9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-inline: auto;
+      margin-bottom: 1.1rem;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px var(--line);
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .hero-avatar svg { opacity: 0.5; }
+    .hero-avatar .avatar-label { opacity: 0.65; }
+
+    /* Used when a real photo is dropped in */
+    .hero-avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* Reviews Carousel */
+    .reviews-marquee {
+      position: relative;
+      overflow: hidden;
+      margin-top: 3rem;
+      padding-block: 0.5rem;
+    }
+
+    .reviews-marquee::before,
+    .reviews-marquee::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: clamp(40px, 8vw, 90px);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .reviews-marquee::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg-soft), transparent);
+    }
+    .reviews-marquee::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg-soft), transparent);
+    }
+
+    .reviews-track {
+      display: flex;
+      gap: 1.25rem;
+      width: max-content;
+      animation: reviews-scroll 45s linear infinite;
+    }
+
+    .reviews-marquee:hover .reviews-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes reviews-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .review-card {
+      flex: 0 0 280px;
+      width: 280px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .review-stars {
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .review-quote {
+      font-size: 0.92rem;
+      color: var(--ink);
+      font-style: italic;
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .review-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      flex-shrink: 0;
+    }
+
+    .review-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .review-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    @media (min-width: 640px) {
+      .review-card {
+        flex-basis: 320px;
+        width: 320px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reviews-track {
+        animation: none;
+      }
+      .reviews-marquee {
+        overflow-x: auto;
+      }
+    }
+
+    /* Transformations marquee (second scrolling row, opposite direction) */
+    .transform-track {
+      display: flex;
+      gap: 1.25rem;
+      width: max-content;
+      animation: transform-scroll 40s linear infinite;
+    }
+    .reviews-marquee:hover .transform-track {
+      animation-play-state: paused;
+    }
+    @keyframes transform-scroll {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+    .transform-card {
+      flex: 0 0 280px;
+      width: 280px;
+      height: 280px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: linear-gradient(145deg, var(--accent-soft), #e8d0d9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    .transform-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .transform-placeholder {
+      color: var(--accent-deep);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 1rem;
+      opacity: 0.85;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .transform-track { animation: none; }
+    }
+
+    /* Who it's for */
+    .for-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .for-card {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      padding: 1.5rem 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .for-card:hover {
+      border-color: var(--accent-soft);
+      box-shadow: 0 4px 18px rgba(201, 125, 146, 0.09);
+    }
+
+    .for-card-icon {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      background: var(--accent-soft);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+
+    .for-card p {
+      font-size: 0.9rem;
+      color: var(--ink);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .pricing-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      padding: 2rem 1.75rem 2.25rem;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s;
+      position: relative;
+      background: var(--bg);
+    }
+    .pricing-card:hover {
+      box-shadow: 0 6px 28px rgba(0,0,0,0.07);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--accent);
+      background: var(--bg);
+    }
+    .pricing-card.featured:hover {
+      box-shadow: 0 6px 28px rgba(201, 125, 146, 0.18);
+    }
+
+    .featured-chip {
+      display: inline-flex;
+      align-items: center;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+      width: fit-content;
+    }
+
+    .pricing-card h3 { margin-bottom: 0.6rem; }
+    .pricing-card .pricing-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .pricing-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.01em;
+    }
+    .pricing-price.text-price {
+      font-size: 1.35rem;
+    }
+    .pricing-price-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+    }
+
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .pricing-features li::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      margin-top: 1px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='8' cy='8' r='7.5' stroke='%23c97d92' stroke-opacity='.35'/%3E%3Cpath d='M5 8l2 2 4-4' stroke='%23c97d92' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .pricing-card .btn { width: 100%; }
+
+    .pricing-note {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .pricing-note a {
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: text-decoration-color 0.2s;
+    }
+    .pricing-note a:hover { text-decoration-color: var(--accent); }
+
+    /* Programmes / Coming Soon */
+    .programmes-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    .programme-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      padding: 1.75rem 1.5rem;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coming-chip {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+
+    .programme-card h4 { color: var(--ink); margin-bottom: 0.5rem; }
+    .programme-card p { font-size: 0.85rem; }
+
+    /* Book / Calendly */
+    .book-inner {
+      max-width: 720px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .book-inner h2 { margin-bottom: 0.9rem; }
+
+    .book-inner .book-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .calendly-wrapper {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+
+    /* Calendly inline widget: keeps its own height when the embed is active */
+    .calendly-inline-widget {
+      min-width: 320px;
+      height: 700px;
+    }
+
+    /* Placeholder shown until Calendly is wired up */
+    .calendly-placeholder {
+      background: linear-gradient(145deg, var(--accent-soft) 0%, #ead3da 100%);
+      border-radius: var(--radius-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+      min-height: 420px;
+      text-align: center;
+    }
+
+    .calendly-placeholder svg {
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .calendly-placeholder .cp-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .calendly-placeholder .cp-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .calendly-placeholder .btn {
+      margin-top: 0.5rem;
+    }
+
+    .book-fallback {
+      margin-top: 1.25rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .book-fallback a {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.65);
+      padding-block: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    .footer-inner {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--section-px);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.6);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-social a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .footer-col a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+      display: inline-block;
+      padding-block: 0.25rem;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .footer-col a:hover { color: #fff; }
+
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--section-px);
+      padding-top: 2rem;
+      margin-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.75rem;
+    }
+    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+    /* Section headers */
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+    .section-header h2 { margin-bottom: 0.85rem; }
+    .section-header p { font-size: 1rem; }
+
+    /* Fade-up animation (progressive enhancement) */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive: mobile-first */
+
+    /* 640px and up: large phone / tablet */
+    @media (min-width: 640px) {
+      .hero-avatar {
+        width: 128px;
+        height: 128px;
+      }
+      .hero-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-buttons .btn {
+        width: auto;
+      }
+      .for-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .programmes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      /* pricing stays 1 col at 640px to avoid awkward 2+1 orphan with 3 cards */
+    }
+
+    /* 900px and up: desktop */
+    @media (min-width: 900px) {
+      .nav-links {
+        display: flex;
+      }
+      .nav-cta {
+        display: inline-flex;
+      }
+      .nav-hamburger {
+        display: none;
+      }
+      .hero-avatar {
+        width: 140px;
+        height: 140px;
+      }
+      .for-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+      .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .programmes-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .footer-inner {
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 3rem;
+      }
+      .footer-bottom {
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-between;
+      }
+    }
+  </style>
+
+  <style>
+    /* Free beginner guide modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(31, 27, 29, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      z-index: 200;
+    }
+    .modal-overlay[hidden] { display: none; }
+    .modal-card {
+      background: var(--bg);
+      border-radius: var(--radius-card);
+      max-width: 420px;
+      width: 100%;
+      padding: 2.25rem 1.75rem 2rem;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+    .modal-card .eyebrow { margin-bottom: 0.6rem; }
+    .modal-card h3 { margin-bottom: 0.6rem; }
+    .modal-card p { font-size: 0.9rem; margin-bottom: 1.25rem; line-height: 1.6; }
+    .modal-close {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.85rem;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+    .modal-close:hover { color: var(--ink); }
+    #guide-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    #guide-form input {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--ink);
+      transition: border-color 0.2s;
+    }
+    #guide-form input:focus { outline: none; border-color: var(--accent); }
+    #guide-form .btn { width: 100%; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="Home" data-en="Yulianna Rodak" data-uk="Юліанна Родак">Yulianna Rodak</a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links">
+          <li><a href="#reviews" data-en="Reviews" data-uk="Відгуки">Reviews</a></li>
+          <li><a href="coaching.html" data-en="Services" data-uk="Послуги">Services</a></li>
+          <li><a href="#book" data-en="Book" data-uk="Записатись">Book</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button class="lang-btn" id="btn-en" aria-pressed="true" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" id="btn-uk" aria-pressed="false" onclick="setLang('uk')">УКР</button>
+        </div>
+        <a href="#book" class="btn btn-primary btn-sm nav-cta" data-en="Book a free consultation" data-uk="Безкоштовна консультація">Book a free consultation</a>
+        <button
+          class="nav-hamburger"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          id="hamburger-btn"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="nav-mobile" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <ul>
+        <li><a href="#reviews" class="mobile-link" data-en="Reviews" data-uk="Відгуки">Reviews</a></li>
+        <li><a href="coaching.html" class="mobile-link" data-en="Services" data-uk="Послуги">Services</a></li>
+        <li><a href="#book" class="mobile-link" data-en="Book" data-uk="Записатись">Book</a></li>
+      </ul>
+      <a href="#book" class="btn btn-primary mobile-link" data-en="Book a free consultation" data-uk="Безкоштовна консультація">Book a free consultation</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-inner fade-up">
+
+        <div class="hero-avatar">
+          <img src="profile.jpg" alt="Yulianna Rodak, personal trainer" class="hero-avatar-img" style="object-position: center 15%;" />
+        </div>
+
+        <span class="eyebrow" data-en="Personal training for women" data-uk="Персональні тренування для жінок">Personal training for women</span>
+        <h1 id="hero-heading" data-en="Lost on where to start? Let's begin together." data-uk="Не знаєш, з чого почати? Почнемо разом.">Lost on where to start? Let's begin together.</h1>
+        <div class="hero-buttons">
+          <button type="button" class="btn btn-primary" id="guide-btn" data-en="Free beginner guide" data-uk="Безкоштовний гайд для початківців">Free beginner guide</button>
+          <a href="coaching.html" class="btn btn-ghost" data-en="See coaching options" data-uk="Дивитись послуги">See coaching options</a>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- REVIEWS CAROUSEL -->
+    <!-- TODO: replace all placeholder quotes with real client testimonials (get written permission first) -->
+    <section id="reviews" class="section-alt" aria-labelledby="reviews-heading">
+      <div class="container">
+        <div class="section-header fade-up">
+          <h2 id="reviews-heading" data-en="What clients say" data-uk="Що кажуть клієнтки">What clients say</h2>
+          <p data-en="Real words from women who started their journey." data-uk="Справжні слова жінок, які розпочали свій шлях.">Real words from women who started their journey.</p>
+        </div>
+      </div>
+
+      <div class="reviews-marquee">
+        <div class="reviews-track">
+
+          <!-- Set A -->
+          <!-- TODO: replace with a real review (get permission) -->
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;I never thought I&#x27;d actually enjoy training. Yulianna made it feel possible, and even something I look forward to.&quot;" data-uk="&quot;Я ніколи не думала, що мені сподобається тренуватись. Юліанна зробила це можливим, і тепер я навіть чекаю на тренування з нетерпінням.&quot;">"I never thought I'd actually enjoy training. Yulianna made it feel possible, and even something I look forward to."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="Online coaching" data-uk="Онлайн-тренування">Online coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- TODO: replace with a real review (get permission) -->
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;I came in with zero confidence in the gym. Six weeks later I feel like a completely different person. The support made all the difference.&quot;" data-uk="&quot;Я прийшла до залу без жодної впевненості в собі. Через шість тижнів відчуваю себе зовсім іншою людиною. Підтримка змінила все.&quot;">"I came in with zero confidence in the gym. Six weeks later I feel like a completely different person. The support made all the difference."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="In-person coaching" data-uk="Персональні тренування">In-person coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- TODO: replace with a real review (get permission) -->
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;Finally a plan that fits around my life and not the other way around. I&#x27;ve tried so many things and nothing stuck. Until this.&quot;" data-uk="&quot;Нарешті план, що вписується в моє життя, а не навпаки. Я пробувала стільки всього, і нічого не трималося. Аж поки не почала тут.&quot;">"Finally a plan that fits around my life and not the other way around. I've tried so many things and nothing stuck. Until this."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="Online coaching" data-uk="Онлайн-тренування">Online coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- TODO: replace with a real review (get permission) -->
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;She meets you exactly where you are. No judgment, just steady encouragement every step of the way.&quot;" data-uk="&quot;Вона зустрічає тебе саме там, де ти є. Без осуду, лише спокійна підтримка на кожному кроці.&quot;">"She meets you exactly where you are. No judgment, just steady encouragement every step of the way."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="In-person coaching" data-uk="Персональні тренування">In-person coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- TODO: replace with a real review (get permission) -->
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;I&#x27;m stronger than I&#x27;ve ever been and it honestly never feels overwhelming. I&#x27;d recommend her to any woman starting out.&quot;" data-uk="&quot;Я сильніша, ніж будь-коли, і це ніколи не відчувається як щось непосильне. Рекомендую кожній жінці, яка тільки починає.&quot;">"I'm stronger than I've ever been and it honestly never feels overwhelming. I'd recommend her to any woman starting out."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="Online coaching" data-uk="Онлайн-тренування">Online coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- TODO: replace with a real review (get permission) -->
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;The weekly check-ins keep me accountable in the kindest way. I actually look forward to them now.&quot;" data-uk="&quot;Щотижневі зідзвони допомагають тримати себе в тонусі, і це відчувається дуже по-доброму. Я тепер справді чекаю на них.&quot;">"The weekly check-ins keep me accountable in the kindest way. I actually look forward to them now."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="Online coaching" data-uk="Онлайн-тренування">Online coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Set B (duplicate for seamless loop) -->
+          <article class="review-card" aria-hidden="true">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;I never thought I&#x27;d actually enjoy training. Yulianna made it feel possible, and even something I look forward to.&quot;" data-uk="&quot;Я ніколи не думала, що мені сподобається тренуватись. Юліанна зробила це можливим, і тепер я навіть чекаю на тренування з нетерпінням.&quot;">"I never thought I'd actually enjoy training. Yulianna made it feel possible, and even something I look forward to."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="Online coaching" data-uk="Онлайн-тренування">Online coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;I came in with zero confidence in the gym. Six weeks later I feel like a completely different person. The support made all the difference.&quot;" data-uk="&quot;Я прийшла до залу без жодної впевненості в собі. Через шість тижнів відчуваю себе зовсім іншою людиною. Підтримка змінила все.&quot;">"I came in with zero confidence in the gym. Six weeks later I feel like a completely different person. The support made all the difference."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="In-person coaching" data-uk="Персональні тренування">In-person coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;Finally a plan that fits around my life and not the other way around. I&#x27;ve tried so many things and nothing stuck. Until this.&quot;" data-uk="&quot;Нарешті план, що вписується в моє життя, а не навпаки. Я пробувала стільки всього, і нічого не трималося. Аж поки не почала тут.&quot;">"Finally a plan that fits around my life and not the other way around. I've tried so many things and nothing stuck. Until this."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="Online coaching" data-uk="Онлайн-тренування">Online coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;She meets you exactly where you are. No judgment, just steady encouragement every step of the way.&quot;" data-uk="&quot;Вона зустрічає тебе саме там, де ти є. Без осуду, лише спокійна підтримка на кожному кроці.&quot;">"She meets you exactly where you are. No judgment, just steady encouragement every step of the way."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="In-person coaching" data-uk="Персональні тренування">In-person coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;I&#x27;m stronger than I&#x27;ve ever been and it honestly never feels overwhelming. I&#x27;d recommend her to any woman starting out.&quot;" data-uk="&quot;Я сильніша, ніж будь-коли, і це ніколи не відчувається як щось непосильне. Рекомендую кожній жінці, яка тільки починає.&quot;">"I'm stronger than I've ever been and it honestly never feels overwhelming. I'd recommend her to any woman starting out."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="Online coaching" data-uk="Онлайн-тренування">Online coaching</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card" aria-hidden="true">
+            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote" data-en="&quot;The weekly check-ins keep me accountable in the kindest way. I actually look forward to them now.&quot;" data-uk="&quot;Щотижневі зідзвони допомагають тримати себе в тонусі, і це відчувається дуже по-доброму. Я тепер справді чекаю на них.&quot;">"The weekly check-ins keep me accountable in the kindest way. I actually look forward to them now."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true"></div>
+              <div>
+                <div class="review-name">[Client name]</div>
+                <div class="review-meta" data-en="Online coaching" data-uk="Онлайн-тренування">Online coaching</div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- TRANSFORMATIONS (second scrolling row) -->
+      <div class="container">
+        <div class="section-header fade-up" style="margin-top:2.75rem;">
+          <h2 data-en="Real results" data-uk="Справжні результати">Real results</h2>
+          <p data-en="Progress from women who put in the work. More coming soon." data-uk="Прогрес жінок, які працювали над собою. Більше — незабаром.">Progress from women who put in the work. More coming soon.</p>
+        </div>
+      </div>
+
+      <div class="reviews-marquee">
+        <div class="transform-track">
+          <!-- Set A -->
+          <figure class="transform-card"><img src="transformation-3.jpg" alt="Client transformation" /></figure>
+          <figure class="transform-card"><img src="transformation-4.jpg" alt="Client transformation" /></figure>
+          <figure class="transform-card"><img src="transformation-5.jpg" alt="Client transformation" /></figure>
+          <!-- Set B (duplicate for seamless loop) -->
+          <figure class="transform-card" aria-hidden="true"><img src="transformation-3.jpg" alt="" /></figure>
+          <figure class="transform-card" aria-hidden="true"><img src="transformation-4.jpg" alt="" /></figure>
+          <figure class="transform-card" aria-hidden="true"><img src="transformation-5.jpg" alt="" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- BOOK -->
+    <section id="book" aria-labelledby="book-heading">
+      <div class="container">
+        <div class="book-inner">
+          <div class="fade-up">
+            <span class="eyebrow" data-en="Free consultation" data-uk="Безкоштовна консультація">Free consultation</span>
+            <h2 id="book-heading" data-en="Book your free consultation." data-uk="Запишись на безкоштовну консультацію.">Book your free consultation.</h2>
+            <p class="book-sub" data-en="A relaxed 15-minute call to talk through where you are, where you want to go, and whether we're a good fit. No pressure, no commitment. Just a conversation." data-uk="Спокійна 15-хвилинна розмова про те, де ти зараз, куди хочеш рухатись і чи підходимо одна одній. Без тиску, без зобов'язань. Просто розмова.">
+              A relaxed 15-minute call to talk through where you are, where you want to go, and whether we're a good fit. No pressure, no commitment. Just a conversation.
+            </p>
+          </div>
+
+          <!-- Cal.com inline embed -->
+          <div class="calendly-wrapper fade-up">
+            <div id="my-cal-inline" style="width:100%;min-width:320px;height:700px;overflow:auto"></div>
+          </div>
+
+          <!-- Cal.com embed script -->
+          <script type="text/javascript">
+            (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+            Cal("init", "free-consultation", {origin:"https://app.cal.com"});
+            Cal.config = Cal.config || {};
+            Cal.config.forwardQueryParams = true;
+            Cal.ns["free-consultation"]("inline", {
+              elementOrSelector: "#my-cal-inline",
+              config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"},
+              calLink: "yulianna-rodak-ouxxk7/free-consultation",
+            });
+            Cal.ns["free-consultation"]("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"month_view"});
+          </script>
+
+          <!-- Fallback while Calendly URL is a placeholder -->
+          <p class="book-fallback">
+            <span data-en="Prefer email?" data-uk="Вважаєш за краще написати?">Prefer email?</span>
+            <!-- TODO: replace # with mailto:youremail@example.com -->
+            <a href="#" data-en="Send a message" data-uk="Написати листа">Send a message</a>
+            <span data-en="and we'll find a time that works." data-uk="і ми знайдемо зручний час.">and we'll find a time that works.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <h3 data-en="Yulianna Rodak" data-uk="Юліанна Родак">Yulianna Rodak</h3>
+        <p data-en="Personal training for women who are ready to start. Beginner-friendly, judgment-free, and built around your life." data-uk="Персональні тренування для жінок, які готові розпочати. Без осуду, доступно для початківців і побудовано під твоє життя.">Personal training for women who are ready to start. Beginner-friendly, judgment-free, and built around your life.</p>
+
+        <div class="footer-social">
+          <a href="https://www.instagram.com/coachyuli?igsh=MWJlZzhpejZpMDhucA==" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/447743508717" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.28 1.2-1.77 1.27-.45.07-1.02.1-1.65-.1-.38-.12-.87-.28-1.5-.55-2.64-1.14-4.36-3.8-4.5-3.98-.13-.18-1.08-1.44-1.08-2.75s.68-1.95.92-2.22c.24-.27.53-.34.7-.34h.5c.16 0 .38-.03.58.44.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.13.29-.26.44-.13.15-.27.34-.39.46-.13.13-.26.27-.11.53.15.27.68 1.12 1.46 1.81 1 .88 1.84 1.16 2.11 1.29.27.13.42.11.58-.07.16-.18.66-.77.84-1.03.18-.27.35-.22.6-.13.24.09 1.53.72 1.8.85.27.13.44.2.51.31.07.13.07.71-.15 1.33z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-en="Navigate" data-uk="Навігація">Navigate</h4>
+        <ul>
+          <li><a href="#reviews" data-en="Reviews" data-uk="Відгуки">Reviews</a></li>
+          <li><a href="coaching.html" data-en="Services" data-uk="Послуги">Services</a></li>
+          <li><a href="#book" data-en="Book" data-uk="Записатись">Book</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-en="Get in touch" data-uk="Зв'язатися">Get in touch</h4>
+        <ul>
+          <li><a href="https://wa.me/447743508717" target="_blank" rel="noopener" data-en="Message me" data-uk="Написати мені">Message me</a></li>
+          <li><a href="https://www.instagram.com/coachyuli?igsh=MWJlZzhpejZpMDhucA==" target="_blank" rel="noopener" data-en="Instagram" data-uk="Instagram">Instagram</a></li>
+          <li><a href="#book" data-en="Book a free consultation" data-uk="Безкоштовна консультація">Book a free consultation</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p data-en="&copy; 2026 Yulianna Rodak. All rights reserved." data-uk="&copy; 2026 Юліанна Родак. Всі права захищені.">&copy; 2026 Yulianna Rodak. All rights reserved.</p>
+      <p data-en="Built with care" data-uk="Зроблено з турботою">Built with care</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // ── Hamburger toggle ──
+    const hamburger = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ── Language toggle ──
+    function setLang(lang) {
+      // Update all translatable elements
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.dataset[lang];
+      });
+
+      // Update <html lang>
+      document.documentElement.lang = lang;
+
+      // Update page title
+      document.title = lang === 'uk'
+        ? 'Юліанна Родак · Персональні тренування для жінок'
+        : 'Yulianna Rodak · Personal Training for Women';
+
+      // Update toggle button states
+      const elEn = document.getElementById('btn-en');
+      if (elEn) elEn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+      const elUk = document.getElementById('btn-uk');
+      if (elUk) elUk.setAttribute('aria-pressed', lang === 'uk' ? 'true' : 'false');
+
+      // Persist choice
+      try { localStorage.setItem('lang', lang); } catch(e) {}
+    }
+
+    // On load: read saved preference (default 'en')
+    (function() {
+      let saved = 'en';
+      try { saved = localStorage.getItem('lang') || 'en'; } catch(e) {}
+      if (saved !== 'en') setLang(saved);
+    })();
+
+    // ── Fade-up on scroll (progressive enhancement) ──
+    if ('IntersectionObserver' in window && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    } else {
+      // If JS/observer not supported or motion is reduced: make everything visible
+      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+    }
+  </script>
+
+  <!-- Free beginner guide modal -->
+  <div class="modal-overlay" id="guide-modal" role="dialog" aria-modal="true" aria-labelledby="guide-modal-title" hidden>
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="guide-modal-close" aria-label="Close">&times;</button>
+
+      <div id="guide-form-wrap">
+        <span class="eyebrow" data-en="Free download" data-uk="Безкоштовне завантаження">Free download</span>
+        <h3 id="guide-modal-title" data-en="Get your free beginner guide" data-uk="Отримай безкоштовний гайд для початківців">Get your free beginner guide</h3>
+        <p data-en="Pop in your email and I'll send you my beginner-friendly guide to getting started." data-uk="Залиш свою електронну пошту, і я надішлю тобі свій гайд для початківців.">Pop in your email and I'll send you my beginner-friendly guide to getting started.</p>
+        <form id="guide-form" action="https://assets.mailerlite.com/jsonp/2546796/forms/194459133124019437/subscribe" method="post" target="ml-guide-iframe" novalidate>
+          <input type="email" id="guide-email" name="fields[email]" required autocomplete="email" placeholder="you@email.com" />
+          <input type="hidden" name="ml-submit" value="1" />
+          <input type="hidden" name="anticsrf" value="true" />
+          <button type="submit" class="btn btn-primary" data-en="Send me the guide" data-uk="Надіслати гайд">Send me the guide</button>
+        </form>
+        <iframe name="ml-guide-iframe" title="MailerLite" style="display:none" aria-hidden="true"></iframe>
+      </div>
+
+      <div id="guide-confirm" hidden>
+        <span class="eyebrow" data-en="You're in!" data-uk="Готово!">You're in!</span>
+        <h3 data-en="Check your inbox!" data-uk="Перевір свою пошту!">Check your inbox!</h3>
+        <p data-en="Thank you! Your free beginner guide is on its way to your email — check your inbox (and spam folder just in case)." data-uk="Дякую! Твій безкоштовний гайд для початківців уже прямує на пошту — перевір вхідні (і папку зі спамом про всяк випадок).">Thank you! Your free beginner guide is on its way to your email — check your inbox (and spam folder just in case).</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const OWNER_EMAIL = "coachyuliannarodak@gmail.com";
+      const openBtn = document.getElementById('guide-btn');
+      const modal = document.getElementById('guide-modal');
+      const closeBtn = document.getElementById('guide-modal-close');
+      const form = document.getElementById('guide-form');
+      const formWrap = document.getElementById('guide-form-wrap');
+      const confirmBox = document.getElementById('guide-confirm');
+      const emailInput = document.getElementById('guide-email');
+
+      function openModal() {
+        formWrap.hidden = false;
+        confirmBox.hidden = true;
+        modal.hidden = false;
+        setTimeout(() => emailInput.focus(), 50);
+      }
+      function closeModal() { modal.hidden = true; }
+
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+      form.addEventListener('submit', function(e) {
+        // Let the form POST to MailerLite (via the hidden iframe); just validate first.
+        if (!emailInput.value.trim() || !emailInput.checkValidity()) {
+          e.preventDefault();
+          emailInput.focus();
+          return;
+        }
+        // Show the confirmation after the submit has fired.
+        setTimeout(function() {
+          formWrap.hidden = true;
+          confirmBox.hidden = false;
+          form.reset();
+        }, 400);
+      });
+    })();
+  </script>
+
+</body>
+</html>

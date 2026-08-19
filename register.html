@@ -1158,7 +1158,9 @@
           <p data-en="Leave your details and I'll reach out with class times, location, and pricing as soon as they're confirmed." data-uk="Залиш свої дані, і я зв'яжусь з тобою щодо розкладу, місця проведення та вартості, щойно все буде підтверджено.">Leave your details and I'll reach out with class times, location, and pricing as soon as they're confirmed.</p>
         </div>
 
-        <form id="register-form" class="fade-up" novalidate>
+        <form id="register-form" class="fade-up" name="ukrainian-classes" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="ukrainian-classes" />
+          <p style="display:none"><label>Leave this empty: <input name="bot-field" /></label></p>
           <div class="form-field">
             <label for="reg-name" data-en="Full name" data-uk="Повне ім'я">Full name</label>
             <input type="text" id="reg-name" name="name" autocomplete="name" required />
@@ -1177,12 +1179,12 @@
             <p class="field-note" data-en="Optional, but it helps me recognise you." data-uk="Необов'язково, але це допоможе мені впізнати тебе.">Optional, but it helps me recognise you.</p>
           </div>
           <button type="submit" class="btn btn-primary" data-en="Send my details" data-uk="Надіслати">Send my details</button>
-          <p class="field-note" style="text-align:center;margin-top:0.9rem;" data-en="This opens your email app with your details filled in, ready to send." data-uk="Це відкриє твій поштовий застосунок із заповненими даними, готовими до відправки.">This opens your email app with your details filled in, ready to send.</p>
+          <p class="field-note" style="text-align:center;margin-top:0.9rem;" data-en="I'll get back to you as soon as class details are confirmed." data-uk="Я зв'яжусь з тобою, щойно деталі занять будуть підтверджені.">I'll get back to you as soon as class details are confirmed.</p>
         </form>
 
         <div class="register-confirm" id="register-confirm">
           <h3 data-en="Almost there!" data-uk="Ще трохи!">Almost there!</h3>
-          <p data-en="Your email app should now be open with your details ready to send. Just hit send and I'll be in touch soon." data-uk="Твій поштовий застосунок має відкритися із заповненими даними. Просто натисни надіслати, і я скоро з тобою зв'яжусь.">Your email app should now be open with your details ready to send. Just hit send and I'll be in touch soon.</p>
+          <p data-en="Thank you! Your details have been sent — I'll be in touch soon with class times, location and pricing." data-uk="Дякую! Твої дані надіслано — я скоро зв'яжусь із розкладом, місцем проведення та вартістю.">Thank you! Your details have been sent — I'll be in touch soon with class times, location and pricing.</p>
         </div>
       </div>
     </section>
@@ -1312,32 +1314,40 @@
   </script>
   <script>
     (function() {
-      const OWNER_EMAIL = "tarirdtr11@gmail.com";
       const form = document.getElementById('register-form');
       const confirmBox = document.getElementById('register-confirm');
+      const submitBtn = form.querySelector('button[type="submit"]');
+
       form.addEventListener('submit', function(e) {
         e.preventDefault();
-        const name = document.getElementById('reg-name').value.trim();
-        const email = document.getElementById('reg-email').value.trim();
-        const phone = document.getElementById('reg-phone').value.trim();
-        const instagram = document.getElementById('reg-instagram').value.trim();
 
-        const subject = "Interest: Fitness Class for Ukrainians in Manchester";
-        const bodyLines = [
-          "Full name: " + name,
-          "Email: " + email,
-          "Phone: " + phone,
-          "Instagram: " + (instagram || "-")
-        ];
-        const body = bodyLines.join("\n");
-        const mailto = "mailto:" + encodeURIComponent(OWNER_EMAIL)
-          + "?subject=" + encodeURIComponent(subject)
-          + "&body=" + encodeURIComponent(body);
+        // Basic check: name, email and phone are required
+        const required = ['reg-name', 'reg-email', 'reg-phone'];
+        for (const id of required) {
+          const el = document.getElementById(id);
+          if (!el.value.trim() || !el.checkValidity()) { el.focus(); return; }
+        }
 
-        window.location.href = mailto;
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending…';
+        }
+
+        // Send straight to Netlify — no email app needed
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString()
+        })
+        .then(function() { showThanks(); })
+        .catch(function() { showThanks(); });
+      });
+
+      function showThanks() {
+        form.style.display = 'none';
         confirmBox.classList.add('visible');
         form.reset();
-      });
+      }
     })();
   </script>
 

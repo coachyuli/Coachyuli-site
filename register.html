@@ -1158,29 +1158,34 @@
           <p data-en="Leave your details and I'll reach out with class times, location, and pricing as soon as they're confirmed." data-uk="Залиш свої дані, і я зв'яжусь з тобою щодо розкладу, місця проведення та вартості, щойно все буде підтверджено.">Leave your details and I'll reach out with class times, location, and pricing as soon as they're confirmed.</p>
         </div>
 
-        <form id="register-form" class="fade-up" name="ukrainian-classes" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-          <input type="hidden" name="form-name" value="ukrainian-classes" />
-          <p style="display:none"><label>Leave this empty: <input name="bot-field" /></label></p>
+        <form id="register-form" class="fade-up" action="https://assets.mailerlite.com/jsonp/2546796/forms/196323102836130877/subscribe" method="post" target="ml-register-iframe" novalidate>
           <div class="form-field">
             <label for="reg-name" data-en="Full name" data-uk="Повне ім'я">Full name</label>
-            <input type="text" id="reg-name" name="name" autocomplete="name" required />
+            <input type="text" id="reg-name" name="fields[name]" autocomplete="name" required />
           </div>
           <div class="form-field">
             <label for="reg-email" data-en="Email address" data-uk="Електронна пошта">Email address</label>
-            <input type="email" id="reg-email" name="email" autocomplete="email" required />
+            <input type="email" id="reg-email" name="fields[email]" autocomplete="email" required />
           </div>
           <div class="form-field">
             <label for="reg-phone" data-en="Phone number" data-uk="Номер телефону">Phone number</label>
-            <input type="tel" id="reg-phone" name="phone" autocomplete="tel" required />
+            <input type="tel" id="reg-phone" name="fields[phone]" autocomplete="tel" required />
           </div>
           <div class="form-field">
             <label for="reg-instagram" data-en="Instagram username" data-uk="Instagram (нікнейм)">Instagram username</label>
-            <input type="text" id="reg-instagram" name="instagram" placeholder="@yourname" autocomplete="off" />
+            <input type="text" id="reg-instagram" name="fields[country]" placeholder="@yourname" autocomplete="off" />
             <p class="field-note" data-en="Optional, but it helps me recognise you." data-uk="Необов'язково, але це допоможе мені впізнати тебе.">Optional, but it helps me recognise you.</p>
           </div>
+          <div class="form-field">
+            <label for="reg-contact" data-en="Best way to contact you?" data-uk="Як краще з тобою зв'язатися?">Best way to contact you?</label>
+            <input type="text" id="reg-contact" name="fields[company]" placeholder="WhatsApp / Instagram / Email" autocomplete="off" required />
+          </div>
+          <input type="hidden" name="ml-submit" value="1" />
+          <input type="hidden" name="anticsrf" value="true" />
           <button type="submit" class="btn btn-primary" data-en="Send my details" data-uk="Надіслати">Send my details</button>
           <p class="field-note" style="text-align:center;margin-top:0.9rem;" data-en="I'll get back to you as soon as class details are confirmed." data-uk="Я зв'яжусь з тобою, щойно деталі занять будуть підтверджені.">I'll get back to you as soon as class details are confirmed.</p>
         </form>
+        <iframe name="ml-register-iframe" title="MailerLite" style="display:none" aria-hidden="true"></iframe>
 
         <div class="register-confirm" id="register-confirm">
           <h3 data-en="Almost there!" data-uk="Ще трохи!">Almost there!</h3>
@@ -1319,13 +1324,15 @@
       const submitBtn = form.querySelector('button[type="submit"]');
 
       form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // Basic check: name, email and phone are required
-        const required = ['reg-name', 'reg-email', 'reg-phone'];
+        // Check the required fields before letting it through
+        const required = ['reg-name', 'reg-email', 'reg-phone', 'reg-contact'];
         for (const id of required) {
           const el = document.getElementById(id);
-          if (!el.value.trim() || !el.checkValidity()) { el.focus(); return; }
+          if (!el.value.trim() || !el.checkValidity()) {
+            e.preventDefault();
+            el.focus();
+            return;
+          }
         }
 
         if (submitBtn) {
@@ -1333,14 +1340,8 @@
           submitBtn.textContent = 'Sending…';
         }
 
-        // Send straight to Netlify — no email app needed
-        fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(new FormData(form)).toString()
-        })
-        .then(function() { showThanks(); })
-        .catch(function() { showThanks(); });
+        // The form posts to MailerLite via the hidden iframe — just show thanks after.
+        setTimeout(showThanks, 500);
       });
 
       function showThanks() {

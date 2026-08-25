@@ -1469,9 +1469,8 @@
 
       <div id="guide-confirm" hidden>
         <span class="eyebrow" data-en="You're in!" data-uk="Готово!">You're in!</span>
-        <h3 data-en="Your guide is downloading" data-uk="Твій гайд завантажується">Your guide is downloading</h3>
-        <p data-en="Thank you! Your download should start automatically. If it doesn't, use the button below." data-uk="Дякую! Завантаження почнеться автоматично. Якщо ні, натисни кнопку нижче.">Thank you! Your download should start automatically. If it doesn't, use the button below.</p>
-        <a href="Your-First-Weeks-In-The-Gym.pdf" download class="btn btn-primary" data-en="Download my guide" data-uk="Завантажити гайд">Download my guide</a>
+        <h3 data-en="Check your inbox!" data-uk="Перевір свою пошту!">Check your inbox!</h3>
+        <p data-en="Thank you! Your free beginner guide is on its way to your email. Check your inbox (and spam folder just in case)." data-uk="Дякую! Твій безкоштовний гайд для початківців уже прямує на пошту. Перевір вхідні (і папку зі спамом про всяк випадок).">Thank you! Your free beginner guide is on its way to your email. Check your inbox (and spam folder just in case).</p>
       </div>
     </div>
   </div>
@@ -1532,14 +1531,6 @@
         confirmBox.hidden = false;
         form.reset();
         if (submitBtn) { submitBtn.disabled = false; }
-
-        // Start the download straight away so they get the guide instantly
-        const a = document.createElement('a');
-        a.href = 'Your-First-Weeks-In-The-Gym.pdf';
-        a.download = 'Your-First-Weeks-In-The-Gym.pdf';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
       }
     })();
   </script>

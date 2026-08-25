@@ -1158,7 +1158,7 @@
           <p data-en="Leave your details and I'll reach out with class times, location, and pricing as soon as they're confirmed." data-uk="Залиш свої дані, і я зв'яжусь з тобою щодо розкладу, місця проведення та вартості, щойно все буде підтверджено.">Leave your details and I'll reach out with class times, location, and pricing as soon as they're confirmed.</p>
         </div>
 
-        <form id="register-form" class="fade-up" action="https://assets.mailerlite.com/jsonp/2546796/forms/196323102836130877/subscribe" method="post" target="ml-register-iframe" novalidate>
+        <form id="register-form" class="fade-up" action="https://assets.mailerlite.com/jsonp/2546796/forms/196323102836130877/subscribe" method="post" novalidate>
           <div class="form-field">
             <label for="reg-name" data-en="Full name" data-uk="Повне ім'я">Full name</label>
             <input type="text" id="reg-name" name="fields[name]" autocomplete="name" required />
@@ -1185,7 +1185,6 @@
           <button type="submit" class="btn btn-primary" data-en="Send my details" data-uk="Надіслати">Send my details</button>
           <p class="field-note" style="text-align:center;margin-top:0.9rem;" data-en="I'll get back to you as soon as class details are confirmed." data-uk="Я зв'яжусь з тобою, щойно деталі занять будуть підтверджені.">I'll get back to you as soon as class details are confirmed.</p>
         </form>
-        <iframe name="ml-register-iframe" title="MailerLite" style="display:none" aria-hidden="true"></iframe>
 
         <div class="register-confirm" id="register-confirm">
           <h3 data-en="Almost there!" data-uk="Ще трохи!">Almost there!</h3>
@@ -1324,12 +1323,13 @@
       const submitBtn = form.querySelector('button[type="submit"]');
 
       form.addEventListener('submit', function(e) {
-        // Check the required fields before letting it through
+        e.preventDefault();
+
+        // Check the required fields first
         const required = ['reg-name', 'reg-email', 'reg-phone', 'reg-contact'];
         for (const id of required) {
           const el = document.getElementById(id);
           if (!el.value.trim() || !el.checkValidity()) {
-            e.preventDefault();
             el.focus();
             return;
           }
@@ -1340,8 +1340,16 @@
           submitBtn.textContent = 'Sending…';
         }
 
-        // The form posts to MailerLite via the hidden iframe, so just show thanks after.
-        setTimeout(showThanks, 500);
+        // Send the details straight to MailerLite
+        const body = new URLSearchParams(new FormData(form)).toString();
+
+        fetch(form.getAttribute('action'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body
+        })
+        .then(function() { showThanks(); })
+        .catch(function() { showThanks(); });
       });
 
       function showThanks() {
